@@ -14,4 +14,3 @@ private:
 };
 
 
-#endif //TOUCHSYNTH2_OSCILLATOR_H

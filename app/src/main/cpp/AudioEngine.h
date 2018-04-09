@@ -21,4 +21,3 @@ private:
 };
 
 
-#endif //TOUCHSYNTH2_AUDIOENGINE_H
