@@ -1,6 +1,7 @@
 #include <jni.h>
 #include <string>
 #include <android/input.h>
+#include <android/log.h>
 #include "AudioEngine.h"
 
 static AudioEngine *audioEngine = new AudioEngine();
@@ -26,8 +27,24 @@ Java_studios_ashmortar_touchsynth_MainActivity_startEngine(JNIEnv *env, jobject 
 }
 
 JNIEXPORT void JNICALL
-Java_studios_ashmortar_touchsynth_MainActivity_stopEngine(JNIEnv *env, jobject /* this */) {
+Java_studios_ashmortar_touchsynth_MainActivity_stopEngine(JNIEnv *env, jobject instance) {
     audioEngine->stop();
 }
 
+JNIEXPORT void JNICALL
+Java_studios_ashmortar_touchsynth_MainActivity_setRecording(JNIEnv *env, jobject instance, jboolean isRecording) {
+    __android_log_print(ANDROID_LOG_DEBUG, "native-lib", "Recording? %d", isRecording);
+    audioEngine->setRecording(isRecording);
+}
+
+JNIEXPORT void JNICALL
+Java_studios_ashmortar_touchsynth_MainActivity_setPlaying(JNIEnv *env, jobject instance, jboolean isPlaying) {
+    __android_log_print(ANDROID_LOG_DEBUG, "native-lib", "Playing? %d", isPlaying);
+    audioEngine->setPlaying(isPlaying);
+}
+
+JNIEXPORT void JNICALL
+Java_studios_ashmortar_touchsynth_MainActivity_setLooping(JNIEnv *env, jobject instance, jboolean isOn) {
+    audioEngine->setLooping(isOn);
+}
 }

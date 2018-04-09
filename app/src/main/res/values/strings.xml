@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">TouchSynth</string>
     <string name="tap">tap for synth</string>
+    <string name="play">HOLD TO PLAY</string>
+    <string name="record">HOLD TO RECORD</string>
+    <string name="loop">LOOP</string>
 </resources>
