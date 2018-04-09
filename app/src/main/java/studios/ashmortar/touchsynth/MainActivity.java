@@ -1,7 +1,6 @@
 package studios.ashmortar.touchsynth;
 
 import android.Manifest;
-import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -12,8 +11,8 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import static android.support.v4.content.PermissionChecker.PERMISSION_GRANTED;
 
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -114,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean isRecordPermissionGranted() {
-        return (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED);
+        return (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PERMISSION_GRANTED);
     }
 
 
