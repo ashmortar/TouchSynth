@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.support.v4.content.PermissionChecker.PERMISSION_GRANTED;
+import static java.lang.String.valueOf;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
@@ -111,7 +112,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 }
         }
         if (v == touchEnv) {
-            touchEvent(event.getAction(), event.getY());
+            double freq = normalizeY(event.getY());
+            touchEvent(event.getAction(), freq);
         }
         return true;
     }
@@ -123,7 +125,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     public double normalizeY(float yVal) {
-        double frequency = 0.00;
+        double frequency;
+        double min = -2670.00;
+        double max = 270.00;
+        double a = 20.00;
+        double b = 880.00;
+
+        frequency = ((b - a)*((yVal * -1) - min))/(max - min) + a;
         // -270.00  through 2670.00 is the yVals
         //a3 = 220.00 through 880.00
         // min = -270
@@ -133,6 +141,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         //        (b-a)(x -min)
         // f(x) = -------------- + a
         //          max - min
+        Log.d(TAG, "normalizeY: yVal = " + valueOf(yVal));
+        Log.d(TAG, "normalizeY: freq = " + valueOf(frequency));
         return frequency;
     }
 }

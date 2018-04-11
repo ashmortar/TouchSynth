@@ -9,14 +9,14 @@ static OscillatorEngine *oscillatorEngine = new OscillatorEngine();
 
 extern "C" {
 JNIEXPORT void JNICALL
-Java_studios_ashmortar_touchsynth_MainActivity_touchEvent(JNIEnv *env, jobject obj, jint action, double freq) {
+Java_studios_ashmortar_touchsynth_MainActivity_touchEvent(JNIEnv *env, jobject obj, jint action, jdouble freq) {
     switch (action) {
         case AMOTION_EVENT_ACTION_DOWN:
-            __android_log_print(ANDROID_LOG_DEBUG, "touch", "%f", freq);
+//            __android_log_print(ANDROID_LOG_DEBUG, "touch", "%f", freq);
             oscillatorEngine->setToneOn(true, freq);
             break;
         case AMOTION_EVENT_ACTION_UP:
-            __android_log_print(ANDROID_LOG_DEBUG, "touch", "set tone on = false");
+//            __android_log_print(ANDROID_LOG_DEBUG, "touch", "set tone on = false");
             oscillatorEngine->setToneOn(false, freq);
             break;
         case AMOTION_EVENT_ACTION_MOVE:
