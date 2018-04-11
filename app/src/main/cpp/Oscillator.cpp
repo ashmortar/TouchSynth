@@ -3,13 +3,19 @@
 
 #include "Oscillator.h"
 #include <math.h>
+#include <android/log.h>
 
 #define TWO_PI (3.14159 * 2)
 #define AMPLITUDE 0.3
-#define FREQUENCY 440.0
+
+
+void Oscillator::setFrequency(double frequency) {
+    frequency_ = frequency;
+    __android_log_print(ANDROID_LOG_DEBUG, "oscillator", "frequency_ = %f", frequency_);
+}
 
 void Oscillator::setSampleRate(int32_t sampleRate) {
-    phaseIncrement_ = (TWO_PI * FREQUENCY) / (double) sampleRate;
+    phaseIncrement_ = (TWO_PI * frequency_) / (double) sampleRate;
 }
 
 void Oscillator::setWaveOn(bool isWaveOn) {

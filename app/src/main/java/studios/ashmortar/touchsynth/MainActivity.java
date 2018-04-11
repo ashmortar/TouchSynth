@@ -11,10 +11,18 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static android.support.v4.content.PermissionChecker.PERMISSION_GRANTED;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
+    @BindView(R.id.touchEnv) TextView touchEnv;
+    @BindView(R.id.record_button) TextView recordButton;
+    @BindView(R.id.loopPlayback) Switch loopPlayback;
 
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -25,53 +33,27 @@ public class MainActivity extends AppCompatActivity {
     private static final int TOUCHSYNTH_REQUEST = 0;
     public static final String TAG = MainActivity.class.getSimpleName();
 
+    public native void startOscillator();
+    public native void stopOscillator();
     public native void startEngine();
     public native void stopEngine();
     public native void setRecording(boolean isRecording);
     public native void setPlaying(boolean isPlaying);
     private native void setLooping(boolean isOn);
+    private native void touchEvent(int action, double freq);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        View recordButton = findViewById(R.id.button_record);
-        recordButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        setRecording(true);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        setRecording(false);
-                        break;
-                }
-                return true;
-            }
-        });
-
-        View playButton = findViewById(R.id.button_play);
-        playButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()){
-                    case MotionEvent.ACTION_DOWN:
-                        setPlaying(true);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        setPlaying(false);
-                        break;
-                }
-                return true;
-            }
-        });
-
-        Switch loopButton = findViewById(R.id.switch_loop);
-        loopButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        ButterKnife.bind(this);
+        startOscillator();
+        touchEnv.setOnTouchListener(this);
+        recordButton.setOnTouchListener(this);
+        loopPlayback.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                setPlaying(isChecked);
                 setLooping(isChecked);
             }
         });
@@ -116,29 +98,41 @@ public class MainActivity extends AppCompatActivity {
         return (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PERMISSION_GRANTED);
     }
 
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if (v == recordButton) {
+            switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        setRecording(true);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        setRecording(false);
+                        break;
+                }
+        }
+        if (v == touchEnv) {
+            touchEvent(event.getAction(), event.getY());
+        }
+        return true;
+    }
 
+    @Override
+    public void onDestroy() {
+        stopOscillator();
+        super.onDestroy();
+    }
 
-    //==============below is ui from first codelab for a440 oscillator on touch===================
-//    private native void touchEvent(int action);
-//    private native void startEngine();
-//    private native void stopEngine();
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//        startEngine();
-//    }
-//
-//    @Override
-//    public boolean onTouchEvent(MotionEvent event) {
-//        touchEvent(event.getAction());
-//        return super.onTouchEvent(event);
-//    }
-//
-//    @Override
-//    public void onDestroy() {
-//        stopEngine();
-//        super.onDestroy();
-//    }
+    public double normalizeY(float yVal) {
+        double frequency = 0.00;
+        // -270.00  through 2670.00 is the yVals
+        //a3 = 220.00 through 880.00
+        // min = -270
+        // max = 2670
+        // a = 220
+        // b = 880
+        //        (b-a)(x -min)
+        // f(x) = -------------- + a
+        //          max - min
+        return frequency;
+    }
 }

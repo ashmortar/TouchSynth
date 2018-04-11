@@ -9,7 +9,6 @@
 #include <cstdint>
 #include <atomic>
 #include <memory>
-#include "Oscillator.h"
 #include "SoundRecording.h"
 
 class AudioEngine {
@@ -18,7 +17,6 @@ public:
     void start();
     void stop();
     void restart();
-    void setToneOn(bool isToneOn);
     aaudio_data_callback_result_t recordingCallback(float *audioData, int32_t numFrames);
     aaudio_data_callback_result_t playbackCallback(float *audioData, int32_t numFrames);
     void setRecording(bool isRecording);
@@ -30,9 +28,6 @@ private:
     std::atomic<bool> mIsPlaying = {false};
     AAudioStream* mPlaybackStream = nullptr;
     AAudioStream* mRecordingStream = nullptr;
-    AAudioStream* mOscillatorStream = nullptr;
-    Oscillator oscillator_;
-    AAudioStream *stream_;
     SoundRecording mSoundRecording;
     void stopStream(AAudioStream *stream) const;
     void closeStream(AAudioStream **stream) const;

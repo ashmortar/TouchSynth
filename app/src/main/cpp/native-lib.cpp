@@ -1,20 +1,26 @@
 #include <jni.h>
-#include <string>
 #include <android/input.h>
 #include <android/log.h>
-#include "AudioEngine.h"
+#include "LooperEngine.h"
+#include "OscillatorEngine.h"
 
 static AudioEngine *audioEngine = new AudioEngine();
+static OscillatorEngine *oscillatorEngine = new OscillatorEngine();
 
 extern "C" {
 JNIEXPORT void JNICALL
-Java_studios_ashmortar_touchsynth_MainActivity_touchEvent(JNIEnv *env, jobject obj, jint action) {
+Java_studios_ashmortar_touchsynth_MainActivity_touchEvent(JNIEnv *env, jobject obj, jint action, double freq) {
     switch (action) {
         case AMOTION_EVENT_ACTION_DOWN:
-            audioEngine->setToneOn(true);
+            __android_log_print(ANDROID_LOG_DEBUG, "touch", "%f", freq);
+            oscillatorEngine->setToneOn(true, freq);
             break;
         case AMOTION_EVENT_ACTION_UP:
-            audioEngine->setToneOn(false);
+            __android_log_print(ANDROID_LOG_DEBUG, "touch", "set tone on = false");
+            oscillatorEngine->setToneOn(false, freq);
+            break;
+        case AMOTION_EVENT_ACTION_MOVE:
+            oscillatorEngine->setToneOn(true, freq);
             break;
         default:
             break;
@@ -32,19 +38,31 @@ Java_studios_ashmortar_touchsynth_MainActivity_stopEngine(JNIEnv *env, jobject i
 }
 
 JNIEXPORT void JNICALL
-Java_studios_ashmortar_touchsynth_MainActivity_setRecording(JNIEnv *env, jobject instance, jboolean isRecording) {
+Java_studios_ashmortar_touchsynth_MainActivity_setRecording(JNIEnv *env, jobject instance,
+                                                            jboolean isRecording) {
     __android_log_print(ANDROID_LOG_DEBUG, "native-lib", "Recording? %d", isRecording);
     audioEngine->setRecording(isRecording);
 }
 
 JNIEXPORT void JNICALL
-Java_studios_ashmortar_touchsynth_MainActivity_setPlaying(JNIEnv *env, jobject instance, jboolean isPlaying) {
+Java_studios_ashmortar_touchsynth_MainActivity_setPlaying(JNIEnv *env, jobject instance,
+                                                          jboolean isPlaying) {
     __android_log_print(ANDROID_LOG_DEBUG, "native-lib", "Playing? %d", isPlaying);
     audioEngine->setPlaying(isPlaying);
 }
 
 JNIEXPORT void JNICALL
-Java_studios_ashmortar_touchsynth_MainActivity_setLooping(JNIEnv *env, jobject instance, jboolean isOn) {
+Java_studios_ashmortar_touchsynth_MainActivity_setLooping(JNIEnv *env, jobject instance,
+                                                          jboolean isOn) {
     audioEngine->setLooping(isOn);
+}
+
+JNIEXPORT void JNICALL
+Java_studios_ashmortar_touchsynth_MainActivity_startOscillator(JNIEnv *env, jobject instance) {
+    oscillatorEngine->start();
+}
+JNIEXPORT void JNICALL
+Java_studios_ashmortar_touchsynth_MainActivity_stopOscillator(JNIEnv *env, jobject instance) {
+    oscillatorEngine->stop();
 }
 }

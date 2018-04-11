@@ -4,7 +4,7 @@
 // - switching oscillator's wave output on and off
 // - closing the stream when its no longer required
 #include "SoundRecordingUtilities.h"
-#include "AudioEngine.h"
+#include "LooperEngine.h"
 #include <thread>
 #include <mutex>
 #include <android/log.h>
@@ -13,16 +13,6 @@
 
 // Double-buffering offers a good tradeoff between latency and protection against glitches.
 constexpr int32_t kBufferSizeInBursts = 2;
-
-//oscillator data callback
-aaudio_data_callback_result_t dataCallback(
-        AAudioStream *stream,
-        void *userData,
-        void *audioData,
-        int32_t numFrames) {
-    ((Oscillator *) (userData))->render(static_cast<float*>(audioData), numFrames);
-    return AAUDIO_CALLBACK_RESULT_CONTINUE;
-}
 
 //recording data callback
 aaudio_data_callback_result_t recordingDataCallback(
@@ -34,7 +24,7 @@ aaudio_data_callback_result_t recordingDataCallback(
             static_cast<float *>(audioData), numFrames);
 
 }
-//playback callback
+//playback data callback
 aaudio_data_callback_result_t  playbackDataCallback(
         AAudioStream __unused *stream,
         void *userData,
@@ -132,63 +122,9 @@ void AudioEngine::start() {
         return;
     }
 
-
-
-//    //this stream outputs the oscillator
-//    AAudioStreamBuilder *streamBuilder;
-//    AAudio_createStreamBuilder(&streamBuilder);
-//    AAudioStreamBuilder_setFormat(streamBuilder, AAUDIO_FORMAT_PCM_FLOAT);
-//    AAudioStreamBuilder_setChannelCount(streamBuilder, 2);
-//    AAudioStreamBuilder_setPerformanceMode(streamBuilder, AAUDIO_PERFORMANCE_MODE_LOW_LATENCY);
-//    AAudioStreamBuilder_setDataCallback(streamBuilder, ::dataCallback, &oscillator_);
-//    AAudioStreamBuilder_setErrorCallback(streamBuilder, ::errorCallback, this);
-//
-//    //opens the stream
-//    aaudio_result_t result = AAudioStreamBuilder_openStream(streamBuilder, &stream_);
-//    if (result != AAUDIO_OK) {
-//        __android_log_print(ANDROID_LOG_ERROR, "AudioEngine", "error opening stream %s", AAudio_convertResultToText(result));
-//        return false;
-//    }
-//
-//    //retrieve the sample rate of the stream for our oscillator
-//    int32_t sampleRate = AAudioStream_getSampleRate(stream_);
-//    oscillator_.setSampleRate(sampleRate);
-//
-//    //set the buffer size
-//    AAudioStream_setBufferSizeInFrames(
-//            stream_, AAudioStream_getFramesPerBurst(stream_) * kBufferSizeInBursts);
-//
-//    // start the stream
-//    result = AAudioStream_requestStart(stream_);
-//    if (result != AAUDIO_OK) {
-//        __android_log_print(ANDROID_LOG_ERROR, "AudioEngine", "Error starting stream %s", AAudio_convertResultToText(result));
-//        return false;
-//    }
-//    AAudioStreamBuilder_delete(streamBuilder);
-//    return true;
 }
 
-void AudioEngine::restart() {
-    static std::mutex restartingLock;
-    if (restartingLock.try_lock()){
-        stop();
-        start();
-        restartingLock.unlock();
-    }
-}
 
-void AudioEngine::stop() {
-    stopStream(mPlaybackStream);
-    closeStream(&mPlaybackStream);
-    stopStream(mRecordingStream);
-    closeStream(&mRecordingStream);
-    stopStream(mOscillatorStream);
-    closeStream(&mOscillatorStream);
-}
-
-void AudioEngine::setToneOn(bool isToneOn) {
-    oscillator_.setWaveOn(isToneOn);
-}
 
 aaudio_data_callback_result_t AudioEngine::recordingCallback(float *audioData, int32_t numFrames) {
     if (mIsRecording) {
@@ -209,6 +145,7 @@ aaudio_data_callback_result_t AudioEngine::playbackCallback(float *audioData, in
     return AAUDIO_CALLBACK_RESULT_CONTINUE;
 }
 
+
 void AudioEngine::setRecording(bool isRecording) {
     if (isRecording) mSoundRecording.clear();
     mIsRecording = isRecording;
@@ -217,6 +154,26 @@ void AudioEngine::setRecording(bool isRecording) {
 void AudioEngine::setPlaying(bool isPlaying) {
     if (isPlaying) mSoundRecording.setReadPositionToStart();
     mIsPlaying = isPlaying;
+}
+
+void AudioEngine::setLooping(bool isOn) {
+    mSoundRecording.setLooping(isOn);
+}
+
+void AudioEngine::restart() {
+    static std::mutex restartingLock;
+    if (restartingLock.try_lock()){
+        stop();
+        start();
+        restartingLock.unlock();
+    }
+}
+
+void AudioEngine::stop() {
+    stopStream(mPlaybackStream);
+    closeStream(&mPlaybackStream);
+    stopStream(mRecordingStream);
+    closeStream(&mRecordingStream);
 }
 
 void AudioEngine::stopStream(AAudioStream *stream) const {
@@ -246,6 +203,4 @@ void AudioEngine::closeStream(AAudioStream **stream) const {
     closingLock.unlock();
 }
 
-void AudioEngine::setLooping(bool isOn) {
-    mSoundRecording.setLooping(isOn);
-}
+
