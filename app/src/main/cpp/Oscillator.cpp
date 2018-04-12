@@ -3,6 +3,7 @@
 
 #include "Oscillator.h"
 #include <math.h>
+#include <android/log.h>
 
 
 #define TWO_PI (3.14159 * 2)
