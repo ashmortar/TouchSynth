@@ -5,6 +5,7 @@ import android.app.ActionBar;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.service.autofill.FillRequest;
@@ -27,15 +28,32 @@ import static android.support.v4.content.PermissionChecker.PERMISSION_GRANTED;
 import static java.lang.String.valueOf;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener{
     @BindView(R.id.touchEnv) TextView touchEnv;
     @BindView(R.id.record_button) TextView recordButton;
     @BindView(R.id.loopPlayback) Switch loopPlayback;
-
-
-
-
-
+    @BindView(R.id.key0) TextView viewKey0;
+    @BindView(R.id.key1) TextView viewKey1;
+    @BindView(R.id.key2) TextView viewKey2;
+    @BindView(R.id.key3) TextView viewKey3;
+    @BindView(R.id.key4) TextView viewKey4;
+    @BindView(R.id.key5) TextView viewKey5;
+    @BindView(R.id.key6) TextView viewKey6;
+    @BindView(R.id.key7) TextView viewKey7;
+    @BindView(R.id.key8) TextView viewKey8;
+    @BindView(R.id.key9) TextView viewKey9;
+    @BindView(R.id.key10) TextView viewKey10;
+    @BindView(R.id.key11) TextView viewKey11;
+    @BindView(R.id.key12) TextView viewKey12;
+    @BindView(R.id.key13) TextView viewKey13;
+    @BindView(R.id.key14) TextView viewKey14;
+    @BindView(R.id.key15) TextView viewKey15;
+    @BindView(R.id.key16) TextView viewKey16;
+    @BindView(R.id.key17) TextView viewKey17;
+    @BindView(R.id.key18) TextView viewKey18;
+    @BindView(R.id.key19) TextView viewKey19;
+    @BindView(R.id.key20) TextView viewKey20;
+    @BindView(R.id.key21) TextView viewKey21;
 
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -53,6 +71,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private int displayWidthInPx;
     private int displayHeightinPx;
     private int keyWidthInPx;
+    private int offSet = 160;
+    private float keyPressedAlpha = 1f;
+    private float keyReleasedAlpha = 0.5f;
 
     //native methods
     public native void startOscillator();
@@ -132,6 +153,146 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        float x = event.getRawX();
+        float y = event.getRawY();
+
+        //change alphas if touch event is within bounds of a key
+        if (viewKey0.getLeft() + offSet <= x && x <= viewKey0.getRight() + offSet && viewKey0.getTop() <= y) {
+            viewKey0.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey0.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey1.getLeft() + offSet <= x && x <= viewKey1.getRight() + offSet && viewKey1.getTop() <= y) {
+            viewKey1.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey1.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey2.getLeft() + offSet <= x && x <= viewKey2.getRight() + offSet && viewKey2.getTop() <= y) {
+            viewKey2.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey2.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey3.getLeft() + offSet <= x && x <= viewKey3.getRight() + offSet && viewKey3.getTop() <= y) {
+            viewKey3.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey3.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey4.getLeft() + offSet <= x && x <= viewKey4.getRight() + offSet && viewKey4.getTop() <= y) {
+            viewKey4.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey4.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey5.getLeft() + offSet <= x && x <= viewKey5.getRight() + offSet && viewKey5.getTop() <= y) {
+            viewKey5.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey5.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey6.getLeft() + offSet <= x && x <= viewKey6.getRight() + offSet && viewKey6.getTop() <= y) {
+            viewKey6.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey6.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey7.getLeft() + offSet <= x && x <= viewKey7.getRight() + offSet && viewKey7.getTop() <= y) {
+            viewKey7.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey7.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey8.getLeft() + offSet <= x && x <= viewKey8.getRight() + offSet && viewKey8.getTop() <= y) {
+            viewKey8.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey8.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey9.getLeft() + offSet <= x && x <= viewKey9.getRight() + offSet && viewKey9.getTop() <= y) {
+            viewKey9.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey9.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey10.getLeft() + offSet <= x && x <= viewKey10.getRight() + offSet && viewKey10.getTop() <= y) {
+            viewKey10.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey10.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey11.getLeft() + offSet <= x && x <= viewKey11.getRight() + offSet && viewKey11.getTop() <= y) {
+            viewKey11.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey11.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey12.getLeft() + offSet <= x && x <= viewKey12.getRight() + offSet && viewKey12.getTop() <= y) {
+            viewKey12.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey12.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey13.getLeft() + offSet <= x && x <= viewKey13.getRight() + offSet && viewKey13.getTop() <= y) {
+            viewKey13.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey13.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey14.getLeft() + offSet <= x && x <= viewKey14.getRight() + offSet && viewKey14.getTop() <= y) {
+            viewKey14.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey14.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey15.getLeft() + offSet <= x && x <= viewKey15.getRight() + offSet && viewKey15.getTop() <= y) {
+            viewKey15.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey15.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey16.getLeft() + offSet <= x && x <= viewKey16.getRight() + offSet && viewKey16.getTop() <= y) {
+            viewKey16.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey16.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey17.getLeft() + offSet <= x && x <= viewKey17.getRight() + offSet && viewKey17.getTop() <= y) {
+            viewKey17.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey17.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey18.getLeft() + offSet <= x && x <= viewKey18.getRight() + offSet && viewKey18.getTop() <= y) {
+            viewKey18.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey18.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey19.getLeft() + offSet <= x && x <= viewKey19.getRight() + offSet && viewKey19.getTop() <= y) {
+            viewKey19.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey19.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey20.getLeft() + offSet <= x && x <= viewKey20.getRight() + offSet && viewKey20.getTop() <= y) {
+            viewKey20.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey20.setAlpha(keyReleasedAlpha);
+        }
+        if (viewKey21.getLeft() + offSet <= x && x <= viewKey21.getRight() + offSet && viewKey21.getTop() <= y) {
+            viewKey21.setAlpha(keyPressedAlpha);
+        } else {
+            viewKey21.setAlpha(keyReleasedAlpha);
+        }
+
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            viewKey0.setAlpha(keyReleasedAlpha);
+            viewKey1.setAlpha(keyReleasedAlpha);
+            viewKey2.setAlpha(keyReleasedAlpha);
+            viewKey3.setAlpha(keyReleasedAlpha);
+            viewKey4.setAlpha(keyReleasedAlpha);
+            viewKey5.setAlpha(keyReleasedAlpha);
+            viewKey6.setAlpha(keyReleasedAlpha);
+            viewKey7.setAlpha(keyReleasedAlpha);
+            viewKey8.setAlpha(keyReleasedAlpha);
+            viewKey9.setAlpha(keyReleasedAlpha);
+            viewKey10.setAlpha(keyReleasedAlpha);
+            viewKey11.setAlpha(keyReleasedAlpha);
+            viewKey12.setAlpha(keyReleasedAlpha);
+            viewKey13.setAlpha(keyReleasedAlpha);
+            viewKey14.setAlpha(keyReleasedAlpha);
+            viewKey15.setAlpha(keyReleasedAlpha);
+            viewKey16.setAlpha(keyReleasedAlpha);
+            viewKey17.setAlpha(keyReleasedAlpha);
+            viewKey18.setAlpha(keyReleasedAlpha);
+            viewKey19.setAlpha(keyReleasedAlpha);
+            viewKey20.setAlpha(keyReleasedAlpha);
+            viewKey21.setAlpha(keyReleasedAlpha);
+        }
+
         if (v == recordButton) {
             switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
@@ -214,13 +375,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 vibe.vibrate(VibrationEffect.createOneShot(vibeLength, vibeAmplitude));
                 freqCheck = freq;
             }
-            Log.d(TAG, "normalizeX: xVal/keyWidth = "+ xVal/keyWidthInPx);
-            Log.d(TAG, "normalizeX: keyPressed = " + keyPressed);
-            Log.d(TAG, "normalizeX:  semiTone = " + semitone);
-            Log.d(TAG, "normalizeX: RANGE = " + RANGE);
-            Log.d(TAG, "normalizeX: multiple(twelfthRootTwo^semiTone = " + (Math.pow(twelfthRootTwo, semitone)));
-            Log.d(TAG, "normalizeX: freq = " + freq);
-            Log.d(TAG, "normalizeX: xPos = " + xVal);
+//            Log.d(TAG, "normalizeX: xVal/keyWidth = "+ xVal/keyWidthInPx);
+//            Log.d(TAG, "normalizeX: keyPressed = " + keyPressed);
+//            Log.d(TAG, "normalizeX:  semiTone = " + semitone);
+//            Log.d(TAG, "normalizeX: RANGE = " + RANGE);
+//            Log.d(TAG, "normalizeX: multiple(twelfthRootTwo^semiTone = " + (Math.pow(twelfthRootTwo, semitone)));
+//            Log.d(TAG, "normalizeX: freq = " + freq);
+//            Log.d(TAG, "normalizeX: xPos = " + xVal);
             return freq;
         }
     }
@@ -247,5 +408,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             params.width = keyWidthInPx;
             view_instance.setLayoutParams(params);
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
