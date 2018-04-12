@@ -44,10 +44,10 @@ void Oscillator::render(float *audioData, int32_t numFramse) {
             // if click when release touch try fade to zero here
 //            audioData[i] = 0;
             if (audioData[i-1] > 0) {
-                __android_log_print(ANDROID_LOG_DEBUG, "audioData positive = ", "%f", audioData[i]);
+//                __android_log_print(ANDROID_LOG_DEBUG, "audioData positive = ", "%f", audioData[i]);
                 audioData[i] = audioData[i-1] - 0.001f;
             } else if (audioData[i-1] < 0) {
-                __android_log_print(ANDROID_LOG_DEBUG, "audioData = negative", "%f", audioData[i]);
+//                __android_log_print(ANDROID_LOG_DEBUG, "audioData = negative", "%f", audioData[i]);
                 audioData[i] = audioData[i-1] + 0.001f;
             } else {
                 audioData[i] = 0;

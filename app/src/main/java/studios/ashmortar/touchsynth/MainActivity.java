@@ -375,13 +375,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 vibe.vibrate(VibrationEffect.createOneShot(vibeLength, vibeAmplitude));
                 freqCheck = freq;
             }
-//            Log.d(TAG, "normalizeX: xVal/keyWidth = "+ xVal/keyWidthInPx);
-//            Log.d(TAG, "normalizeX: keyPressed = " + keyPressed);
-//            Log.d(TAG, "normalizeX:  semiTone = " + semitone);
-//            Log.d(TAG, "normalizeX: RANGE = " + RANGE);
-//            Log.d(TAG, "normalizeX: multiple(twelfthRootTwo^semiTone = " + (Math.pow(twelfthRootTwo, semitone)));
-//            Log.d(TAG, "normalizeX: freq = " + freq);
-//            Log.d(TAG, "normalizeX: xPos = " + xVal);
+
             return freq;
         }
     }
