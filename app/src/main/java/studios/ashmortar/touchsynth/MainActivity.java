@@ -226,10 +226,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     public double normalizeY(float yVal) {
-        double amplitude = ((yVal*-1 + 1440)/1440)/2;
-        Log.d(TAG, "normalizeY: yVal = " + yVal);
-        Log.d(TAG, "normalizeY: amplitude = " + amplitude);
-        return amplitude;
+        if (yVal < 0) {
+            return 0.6;
+        } else {
+            double amplitude = ((yVal*-1 + 900)/900) * 0.6;
+            Log.d(TAG, "normalizeY: yVal = " + yVal);
+            Log.d(TAG, "normalizeY: amplitude = " + amplitude);
+            return amplitude;
+        }
     }
 
     public void setKeyViewWidth(int keyWidthInPx) {
