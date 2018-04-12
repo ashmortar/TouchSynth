@@ -5,40 +5,264 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@android:color/darker_gray">
+    android:background="#424242">
 
     <TextView
         android:id="@+id/touchEnv"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="250dp"
         android:background="@android:color/white"
-        android:elevation="0dp"
+        android:elevation="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:alpha="0"/>
 
     <TextView
         android:id="@+id/record_button"
-        android:layout_width="193dp"
-        android:layout_height="150dp"
+        android:layout_width="72dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="204dp"
+        android:layout_marginTop="16dp"
         android:background="@color/light_red"
         android:text="hold to record"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-         />
+        app:layout_constraintTop_toBottomOf="parent"
+        android:elevation="2dp"/>
 
     <Switch
         android:id="@+id/loopPlayback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:layout_marginEnd="56dp"
+        android:layout_marginTop="16dp"
         android:text="@string/loop"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toEndOf="@+id/record_button"
+        app:layout_constraintTop_toBottomOf="parent"
+        android:elevation="2dp"/>
+
+    <TextView
+        android:id="@+id/key0"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="#ef3c42"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key1"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key0"
+        android:background="#f69537"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key2"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key1"
+        android:background="#fad435"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key3"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key2"
+        android:background="#dff429"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key4"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key3"
+        android:background="#52c67f"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key5"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key4"
+        android:background="#4592ca"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key6"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key5"
+        android:background="#7328b6"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key7"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key6"
+        android:background="#ef3c42"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key8"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key7"
+        android:background="#f69537"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key9"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key8"
+        android:background="#fad435"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key10"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key9"
+        android:background="#dff429"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key11"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key10"
+        android:background="#52c67f"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key12"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key11"
+        android:background="#4592ca"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key13"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key12"
+        android:background="#7328b6"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key14"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key13"
+        android:background="#ef3c42"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key15"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key14"
+        android:background="#f69537"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key16"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key15"
+        android:background="#fad435"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key17"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key16"
+        android:background="#dff429"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key18"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key17"
+        android:background="#52c67f"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key19"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key18"
+        android:background="#4592ca"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key20"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key19"
+        android:background="#7328b6"
+        android:layout_marginStart="2px"
+        />
+    <TextView
+        android:id="@+id/key21"
+        android:layout_width="127px"
+        android:layout_height="250dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/key20"
+        android:background="#ef3c42"
+        android:layout_marginStart="2px"
+        />
 
 
 </android.support.constraint.ConstraintLayout>

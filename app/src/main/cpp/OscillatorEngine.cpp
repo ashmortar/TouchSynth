@@ -80,8 +80,9 @@ void OscillatorEngine::stop() {
     }
 }
 
-void OscillatorEngine::setToneOn(bool isToneOn, double freq) {
+void OscillatorEngine::setToneOn(bool isToneOn, double freq, double amp) {
     oscillator_.setFrequency(freq);
+    oscillator_.setAmplitude(amp);
     int32_t sampleRate = 48000; //AAudioStream_getSampleRate(stream_)
 //    __android_log_print(ANDROID_LOG_DEBUG, "sampleRate =", "%d", sampleRate);
     oscillator_.setSampleRate(sampleRate);

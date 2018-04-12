@@ -12,7 +12,7 @@ public:
     bool start();
     void stop();
     void restart();
-    void setToneOn(bool isToneOn, double freq);
+    void setToneOn(bool isToneOn, double freq, double amp);
 
 private:
     Oscillator oscillator_;

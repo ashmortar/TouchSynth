@@ -7,12 +7,15 @@
 
 
 #define TWO_PI (3.14159 * 2)
-#define AMPLITUDE 0.3
 
 
 void Oscillator::setFrequency(double frequency) {
     frequency_ = frequency;
 //    __android_log_print(ANDROID_LOG_DEBUG, "oscillator", "frequency_ = %f", frequency_);
+}
+
+void Oscillator::setAmplitude(double amplitude) {
+    amplitude_ = amplitude;
 }
 
 void Oscillator::setSampleRate(int32_t sampleRate) {
@@ -30,7 +33,7 @@ void Oscillator::render(float *audioData, int32_t numFramse) {
 
         if (isWaveOn_.load()) {
             //calculates the next sample value for sin wave
-            audioData[i] = (float) (sin(phase_) * AMPLITUDE);
+            audioData[i] = (float) (sin(phase_) * amplitude_);
 
             //increments the phase, handling wrap around
             phase_ += phaseIncrement_;
@@ -52,3 +55,5 @@ void Oscillator::render(float *audioData, int32_t numFramse) {
         }
     }
 }
+
+
