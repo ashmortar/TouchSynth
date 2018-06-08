@@ -1,0 +1,2 @@
+# TouchSynth
+an android synthesizer currently in development.  It utilizes Google's [Android Audio High Performance Framework](https://github.com/googlesamples/android-audio-high-performance) to communicate directly to the audio drivers to reduce soud latency.  The project will be demo'd in its MVP state at the Epicodus demo day 7/26/2018. Contact me at ashmortar@gmail.com with any question. Development began as my Epicodus Android track Capstone project but will continue as a labor of love.
